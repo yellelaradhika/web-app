@@ -1,77 +1,73 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Easy Todo List</title>
+    <title>My Links Dashboard</title>
+    
     <style>
-        /* Basic, easy-to-read styling */
+        /* 1. Page Background and Font */
         body {
+            background-color: #f3e5f5; /* Light purple background */
             font-family: Arial, sans-serif;
-            margin: 40px;
-            background-color: #f0f0f0;
+            text-align: center;
+            margin: 0;
+            padding: 50px 20px;
         }
-        .box {
+
+        /* 2. The Main Profile Container Card */
+        .profile-card {
             background-color: white;
-            padding: 20px;
-            border: 2px solid black;
-            width: 300px;
+            max-width: 400px;
+            margin: 0 auto; /* Centers the card on the screen */
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1); /* Soft shadow */
         }
-        ul {
-            margin-top: 15px;
-            padding-left: 20px;
+
+        /* 3. Style for the Profile Name */
+        h2 {
+            color: #4a148c; /* Dark purple */
+            margin-bottom: 5px;
         }
-        li {
-            margin-bottom: 8px;
+
+        p.bio {
+            color: #757575;
+            font-size: 14px;
+            margin-bottom: 30px;
         }
-        .del-btn {
-            color: red;
-            margin-left: 10px;
-            cursor: pointer;
+
+        /* 4. Styling the Link Buttons */
+        .link-btn {
+            display: block; /* Makes the button take up the whole width */
+            background-color: #8e24aa; /* Vibrant purple */
+            color: white;
+            text-decoration: none; /* Removes the underline from links */
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 16px;
+            transition: background 0.2s; /* Makes the color change smooth */
+        }
+
+        /* 5. Change button color when hovering over it */
+        .link-btn:hover {
+            background-color: #d81b60; /* Changes to pink on hover */
         }
     </style>
 </head>
 <body>
 
-    <div class="box">
-        <h2>My Simple To-Do</h2>
+    <div class="profile-card">
+        
+        <h2>@YourName Here</h2>
+        <p class="bio">Welcome to my space! Check out my work and cool things I find on the internet below.</p>
 
-        <input type="text" id="myInput" placeholder="Write a task...">
-        <button onclick="newItem()">Add</button>
+        <a href="#" target="_blank" class="link-btn">🌐 Visit My Portfolio</a>
+        <a href="#" target="_blank" class="link-btn">📸 Follow Me on Instagram</a>
+        <a href="#" target="_blank" class="link-btn">💻 Check Out My GitHub</a>
+        <a href="#" target="_blank" class="link-btn">📝 Read My Blog</a>
 
-        <ul id="myList"></ul>
     </div>
-
-    <script>
-        function newItem() {
-            // 1. Get the text from the input box
-            var text = document.getElementById("myInput").value;
-
-            if (text === "") {
-                alert("Please type something!");
-                return;
-            }
-
-            // 2. Create a new list item (li)
-            var li = document.createElement("li");
-            li.innerText = text;
-
-            // 3. Create a small clicker to delete it
-            var removeSpan = document.createElement("span");
-            removeSpan.innerText = "[Delete]";
-            removeSpan.className = "del-btn";
-            
-            // Make the delete text work when clicked
-            removeSpan.onclick = function() {
-                li.remove();
-            };
-
-            // 4. Put the delete button inside the li, then put the li in the ul
-            li.appendChild(removeSpan);
-            document.getElementById("myList").appendChild(li);
-
-            // 5. Clear the input box for the next task
-            document.getElementById("myInput").value = "";
-        }
-    </script>
 
 </body>
 </html>
