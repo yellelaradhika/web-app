@@ -1,72 +1,248 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>My Links Dashboard</title>
+    <title>Responsive Portfolio Dashboard</title>
     
     <style>
-        /* 1. Page Background and Font */
+        /* 1. Global Page Styles */
         body {
-            background-color: #f3e5f5; /* Light purple background */
-            font-family: Arial, sans-serif;
-            text-align: center;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            font-family: 'Segoe UI', Arial, sans-serif;
             margin: 0;
-            padding: 50px 20px;
+            padding: 0; /* Changed to 0 so the navbar touches the top of the screen */
+            min-height: 100vh;
+            box-sizing: border-box;
         }
 
-        /* 2. The Main Profile Container Card */
+        /* 2. RESPONSIVE NAVBAR STYLE (New Extension) */
+        .navbar {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            padding: 15px 30px;
+            display: flex;
+            flex-direction: column; /* Stacks links vertically on mobile phones */
+            align-items: center;
+            gap: 15px;
+        }
+
+        .nav-logo {
+            font-size: 20px;
+            font-weight: bold;
+            color: #2c3e50;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #7f8c8d;
+            font-weight: 600;
+            font-size: 15px;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: #3498db;
+        }
+
+        /* 3. Main Dashboard Content Wrapper */
+        .main-content {
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Responsive Dashboard Container */
+        .dashboard-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            max-width: 900px;
+            width: 100%;
+            animation: popUp 0.6s ease-out;
+        }
+
+        /* Left Panel: Profile Info Card */
         .profile-card {
             background-color: white;
-            max-width: 400px;
-            margin: 0 auto; /* Centers the card on the screen */
             padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1); /* Soft shadow */
+            border-radius: 24px;
+            box-shadow: 0px 15px 35px rgba(0, 0, 0, 0.05);
+            text-align: center;
         }
 
-        /* 3. Style for the Profile Name */
+        .profile-img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 4px solid #3498db;
+            object-fit: cover;
+            margin-bottom: 15px;
+        }
+
         h2 {
-            color: #4a148c; /* Dark purple */
-            margin-bottom: 5px;
+            color: #2c3e50;
+            margin: 5px 0;
         }
 
         p.bio {
-            color: #757575;
-            font-size: 14px;
-            margin-bottom: 30px;
+            color: #7f8c8d;
+            font-size: 15px;
+            line-height: 1.4;
         }
 
-        /* 4. Styling the Link Buttons */
+        /* Right Panel: Links organized using CSS Grid */
+        .links-grid {
+            display: grid;
+            grid-template-columns: 1fr; /* Mobile default: 1 column */
+            gap: 15px;
+        }
+
+        /* Link Button Styling */
         .link-btn {
-            display: block; /* Makes the button take up the whole width */
-            background-color: #8e24aa; /* Vibrant purple */
-            color: white;
-            text-decoration: none; /* Removes the underline from links */
-            padding: 15px;
-            margin: 15px 0;
-            border-radius: 10px;
-            font-weight: bold;
-            font-size: 16px;
-            transition: background 0.2s; /* Makes the color change smooth */
+            background-color: white;
+            color: #2c3e50;
+            text-decoration: none;
+            padding: 20px;
+            border-radius: 16px;
+            box-shadow: 0px 10px 20px rgba(0,0,0,0.02);
+            border: 2px solid transparent;
+            transition: all 0.25s ease;
+            text-align: left;
         }
 
-        /* 5. Change button color when hovering over it */
+        .link-btn span {
+            display: block;
+            font-size: 13px;
+            color: #95a5a6;
+            margin-top: 4px;
+            font-weight: normal;
+        }
+
         .link-btn:hover {
-            background-color: #d81b60; /* Changes to pink on hover */
+            border-color: #3498db;
+            color: #3498db;
+            transform: translateY(-4px);
+            box-shadow: 0px 12px 20px rgba(52, 152, 219, 0.15);
+        }
+
+        /* Social Icon Footer */
+        .social-icons {
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+
+        .social-icon {
+            display: inline-block;
+            margin: 0 12px;
+            font-size: 22px;
+            text-decoration: none;
+            color: #95a5a6;
+            transition: color 0.2s;
+        }
+
+        .social-icon:hover {
+            color: #3498db;
+        }
+
+        /* =======================================================
+           4. MEDIA QUERY: RESPONSIVE UPGRADES FOR DESKTOP
+           ======================================================= */
+        @media (min-width: 768px) {
+            
+            /* Navbar switches to a sleek horizontal layout */
+            .navbar {
+                flex-direction: row;
+                justify-content: space-between;
+                padding: 20px 80px;
+            }
+
+            /* Main dashboard contents side-by-side */
+            .dashboard-container {
+                flex-direction: row;
+                align-items: stretch;
+            }
+
+            /* Profile card fixed width adjustment */
+            .profile-card {
+                flex: 1;
+                max-width: 300px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
+
+            /* Links section turns into 2 columns */
+            .links-grid {
+                flex: 2;
+                grid-template-columns: repeat(2, 1fr);
+                align-content: center;
+            }
+        }
+
+        /* Entrance Animation */
+        @keyframes popUp {
+            0% { transform: translateY(15px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
         }
     </style>
 </head>
 <body>
 
-    <div class="profile-card">
-        
-        <h2>@YourName Here</h2>
-        <p class="bio">Welcome to my space! Check out my work and cool things I find on the internet below.</p>
+    <nav class="navbar">
+        <a href="#" class="nav-logo">🚀 DevPortfolio</a>
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Projects</a></li>
+            <li><a href="#">Experience</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </nav>
 
-        <a href="#" target="_blank" class="link-btn">🌐 Visit My Portfolio</a>
-        <a href="#" target="_blank" class="link-btn">📸 Follow Me on Instagram</a>
-        <a href="#" target="_blank" class="link-btn">💻 Check Out My GitHub</a>
-        <a href="#" target="_blank" class="link-btn">📝 Read My Blog</a>
+    <div class="main-content">
+        <div class="dashboard-container">
+            
+            <div class="profile-card">
+                <img class="profile-img" src="https://via.placeholder.com/100" alt="Profile Picture">
+                <h2>Intern Developer</h2>
+                <p class="bio">Building clean, modern, and ultra-responsive user interfaces for the modern web.</p>
+                
+                <div class="social-icons">
+                    <a href="#" class="social-icon">✉️</a>
+                    <a href="#" class="social-icon">💼</a>
+                    <a href="#" class="social-icon">💻</a>
+                </div>
+            </div>
 
+            <div class="links-grid">
+                <a href="#" target="_blank" class="link-btn">
+                    🚀 Live Projects
+                    <span>Explore my production web applications.</span>
+                </a>
+                <a href="#" target="_blank" class="link-btn">
+                    📝 UI/UX Design System
+                    <span>View component styles and wireframes.</span>
+                </a>
+                <a href="#" target="_blank" class="link-btn">
+                    📚 Technical Documentation
+                    <span>Read through my setup guides and APIs.</span>
+                </a>
+                <a href="#" target="_blank" class="link-btn">
+                    📈 Performance Metrics
+                    <span>Check page speeds and optimization scores.</span>
+                </a>
+            </div>
+
+        </div>
     </div>
 
 </body>
